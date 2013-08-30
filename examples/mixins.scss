@@ -1,0 +1,17 @@
+@mixin padding ($param: 10px) {
+  padding: $param;
+}
+
+.box2 {
+    @include padding;
+
+    background: blue;
+    border: 1px solid;
+}
+
+.box1 {
+    @include padding(20px);
+
+    background: green;
+    border: 1px solid;
+}

@@ -1,0 +1,24 @@
+// In-depth article on CSS Tricks: http://css-tricks.com/the-extend-concept/
+
+%big-text {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+%dashed-underline {
+    border-bottom: 3px dotted blue;
+}
+
+.clearfix {
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+h1 {
+    @extend %big-text;
+    @extend %dashed-underline;
+    @extend .clearfix;
+}

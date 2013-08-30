@@ -1,13 +1,13 @@
 a {
     color: blue;
 
-    &:hover {
+    &:hover { // a:hover
         color: yellow;
     }
 }
 
 a {
-    nav & {
+    nav & { // nav a
         color: green;
     }
 }
