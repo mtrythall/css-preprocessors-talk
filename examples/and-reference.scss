@@ -1,0 +1,18 @@
+a {
+    color: blue;
+
+    &:hover {
+        color: yellow;
+    }
+}
+
+a {
+    nav & {
+        color: green;
+    }
+}
+
+// Same as above
+nav a {
+    color: green;
+}

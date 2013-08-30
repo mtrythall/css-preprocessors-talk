@@ -1,0 +1,17 @@
+$text-color: blue;
+$font-style: "Lucida Grande";
+
+a {
+    color: $text-color; // Blue
+    border: 1px $font-style; // Lucida Grande
+}
+
+p {
+    $text-color: green;
+    $font-style: "Lucida Grande";
+
+    a {
+        color: $text-color; // Green
+        border: 1px $border-style; // Solid
+    }
+}
