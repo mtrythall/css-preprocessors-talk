@@ -1,0 +1,24 @@
+// ---------------------------------------------------------------------------
+// Imports
+
+@import "base";
+
+/* Authored Dependencies */
+@import "mixins";
+@import "partials";
+@import "utility"; // general classes used by everything
+
+/* Patterns */
+@import "global/elements"; // common elements, h1s, a, table, etc
+@import "global/forms";
+@import "global/components"; // special design components, non-interactive widgets
+@import "global/widgets"; // any component with interactivity or IO
+
+/* Structure */
+@import "global/layout";
+@import "global/header";
+@import "global/footer";
+@import "global/side-nav";
+
+/* Views */
+@import "views/articles";

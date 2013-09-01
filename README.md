@@ -1,4 +1,4 @@
 css-preprocessors-talk
 ======================
 
-"CSS Preprocessors" - A talk by Michael Trythall for DjangoCon '13
+"CSS Preprocessors" - A presentation by Michael Trythall for DjangoCon '13

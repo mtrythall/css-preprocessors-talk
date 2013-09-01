@@ -1,16 +1,21 @@
-@mixin padding ($param: 10px) {
+@mixin padding ($param: 1em) { // $param has a default value of 1em
   padding: $param;
 }
 
+@mixin border ($direction: bottom, $weight: 1px, $style: solid, $color: black) {
+    border-#{$direction}: $weight $style $color; // String interpolation
+}
+
 .box2 {
-    @include padding;
+    @include padding; // padding: 1em;
 
     background: blue;
     border: 1px solid;
 }
 
 .box1 {
-    @include padding(20px);
+    @include padding(5em); // padding: 5em;
+    @include border(left, 10px, dotted, red); // border-left: 10px dotted red;
 
     background: green;
     border: 1px solid;

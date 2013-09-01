@@ -1,5 +1,6 @@
 $text-color: blue;
 $font-style: "Lucida Grande";
+$font-size: 16px;
 
 a {
     color: $text-color; // Blue
@@ -14,4 +15,8 @@ p {
         color: $text-color; // Green
         border: 1px $border-style; // Solid
     }
+}
+
+h3 {
+    font-size: $font-size * 2; // 32px
 }
