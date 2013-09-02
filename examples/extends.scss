@@ -1,24 +1,24 @@
+// // Extends, aka Selector Inheritance
 // In-depth article on CSS Tricks: http://css-tricks.com/the-extend-concept/
 
 %big-text { // Silent/Placeholder selector! Scss/Sass only
-    font-size: 40px;
+    font-size: 20em;
     font-weight: bold;
 }
 
 %dashed-underline {
-    border-bottom: 3px dotted blue;
+    border-bottom: 3px dashed;
 }
 
-.clearfix {
-    &:after {
-        content: "";
-        display: table;
-        clear: both;
-    }
-}
-
-h1 {
-    @extend %big-text;
+.error {
     @extend %dashed-underline;
-    @extend .clearfix;
+
+    color: red;
+}
+
+.server-error {
+    @extend %big-text;
+    @extend .error;
+
+    font-size: 30em;
 }

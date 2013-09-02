@@ -1,22 +1,39 @@
-$text-color: blue;
-$font-style: "Lucida Grande";
 $font-size: 16px;
+$text-color: blue;
 
 a {
-    color: $text-color; // Blue
-    border: 1px $font-style; // Lucida Grande
+    color: $text-color; // blue
 }
 
 p {
     $text-color: green;
-    $font-style: "Lucida Grande";
+    $background-color: black;
 
     a {
-        color: $text-color; // Green
-        border: 1px $border-style; // Solid
+        background-color: $background-color;
+        color: $text-color; // green
     }
 }
 
-h3 {
-    font-size: $font-size * 2; // 32px
+h1 {
+    // background-color: $background-color; - Note: Would be undefined!
+    font-size: $font-size * 4; // 64px
+    color: $text-color; // green!
 }
+
+/*
+
+// OUTPUT
+
+a {
+  color: blue; }
+
+p a {
+  background-color: black;
+  color: green; }
+
+h1 {
+  font-size: 64px;
+  color: green; }
+
+*/

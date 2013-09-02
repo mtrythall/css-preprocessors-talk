@@ -1,0 +1,39 @@
+@font-size: 16px;
+@text-color: blue;
+
+a {
+    color: @text-color; // blue
+}
+
+p {
+    @text-color: green;
+    @background-color: black;
+
+    a {
+        background-color: @background-color;
+        color: @text-color; // green
+    }
+}
+
+h1 {
+    // background-color: $background-color; - Note: Would be undefined!
+    font-size: @font-size * 4; // 64px
+    color: @text-color; // green!
+}
+
+/*
+
+// OUTPUT
+
+a {
+  color: #0000ff;
+}
+p a {
+  background-color: #000000;
+  color: #008000;
+}
+h1 {
+  font-size: 64px;
+  color: #0000ff;
+}
+*/
