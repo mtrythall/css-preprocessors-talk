@@ -1,0 +1,5 @@
+@each $employee in Pete, Mike, Martin, Yann {
+  li.employee-#{$employee} {
+    background-image: url('/images/photos/#{$employee}.jpg');
+  }
+}

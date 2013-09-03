@@ -1,0 +1,7 @@
+@function add-sizes($size1, $size2){
+  @return $size1 + $size2
+}
+
+p {
+    font-size: add-sizes(3em, 10em);
+}

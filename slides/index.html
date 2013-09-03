@@ -274,7 +274,7 @@ p {
 
 h1 {
     font-size: $font-size * 4; // 64px
-    color: $text-color;
+    color: $text-color; // green!
 }
 					</code></pre>
 
@@ -380,16 +380,27 @@ p {
 
 				<section>
 					<h2>Built-ins</h2>
-					
 
-					<!-- XXX -->
 					<pre><code data-trim contenteditable>
-lighten()
+p {
+    color: lighten(green, 5%);
+    background-color: darken(yellow, 10%);
+    font-size: ceil(12.78);
+    line-height: floor(12.78);
+}
+
 					</code></pre>
 
 					<pre><code data-trim contenteditable>
-lighten()
+p {
+  color: #009a00;
+  background-color: #cccc00;
+  font-size: 13;
+  line-height: 12; 
+}
 </code></pre>
+
+<p>Plus dozens more</p>
 				</section>
 
 				<section>
@@ -403,12 +414,12 @@ lighten()
     border-#{$direction}: $weight $style $color; // String interpolation
 }
 
-.box2 {
+.box1 {
     @include padding; // padding: 1em;
     background: blue;
 }
 
-.box1 {
+.box2 {
     @include padding(5em); // padding: 5em;
     @include border(left, 10px, dotted, red); // border-left: 10px dotted red;
     background: green;
@@ -420,7 +431,7 @@ lighten()
 
 						<p>Parameters can be optional.</p>
 
-						<p>
+						<p>LESS has guarded mixins, which only execute when a condition is met</p>
 					</aside>
 				</section>
 
@@ -444,12 +455,25 @@ lighten()
 					</aside>
 				</section>
 
-				
-
 				<section>
 					<h2>Functions</h2>
 					<p>Not in LESS</p>
-<!-- XXX -->
+					
+					<pre><code data-trim contenteditable>
+@function add-sizes($size1, $size2){
+  @return $size1 + $size2
+}
+
+p {
+    font-size: add-sizes(3em, 10em);
+}
+					</code></pre>
+
+										<pre><code data-trim contenteditable>
+p {
+	font-size: 13em;
+}
+					</code></pre>
 				</section>
 
 				<section>
@@ -539,10 +563,89 @@ p {
 				</section>
 
 				<section>
-					<h2>Loops</h2>
+					<h2>For Loops</h2>
+					<pre><code data-trim contenteditable>
+@for $i from 1 through 5 {
+  li.item-#{$i} { width: 1.5em * $i; }
+}
+</code></pre>
 
-					<!-- XXX -->
+<pre><code data-trim contenteditable>
+li.item-1 {
+  width: 1.5em; 
+}
 
+li.item-2 {
+  width: 3em; 
+}
+
+li.item-3 {
+  width: 4.5em; 
+}
+
+li.item-4 {
+  width: 6em; 
+}
+
+li.item-5 {
+  width: 7.5em; 
+}
+</code></pre>
+				</section>
+
+				<section>
+					<h2>Each Loops</h2>
+					<pre><code data-trim contenteditable>
+@each $employee in Pete, Mike, Martin, Yann {
+  li.employee-#{$employee} {
+    background-image: url('/images/photos/#{$employee}.jpg');
+  }
+}
+</code></pre>
+
+<pre><code data-trim contenteditable>
+li.employee-Pete {
+  background-image: url("/images/photos/Pete.jpg");
+}
+
+li.employee-Mike {
+  background-image: url("/images/photos/Mike.jpg");
+}
+
+li.employee-Martin {
+  background-image: url("/images/photos/Martin.jpg");
+}
+
+li.employee-Yann {
+  background-image: url("/images/photos/Yann.jpg");
+}
+</code></pre>
+				</section>
+
+				<section>
+					<h2>While Loops</h2>
+					<pre><code data-trim contenteditable>
+$i: 6;
+@while $i > 0 {
+  .item-#{$i} { width: 2em * $i; }
+  $i: $i - 2;
+}
+</code></pre>
+
+<pre><code data-trim contenteditable>
+.item-6 {
+  width: 12em; 
+}
+
+.item-4 {
+  width: 8em; 
+}
+
+.item-2 {
+  width: 4em; 
+}
+</code></pre>
+<p>Shamefully copied from sass-lang.com because I can't think of a realistic use case</p>
 				</section>
 
 
@@ -778,7 +881,22 @@ $h1-font-size: $base-font-size * 2.5;
 				</section>
 
 				<section>
-					<h1>FIN</h1>
+					<h2>Other Problems</h2>
+				</section>
+
+				<section>
+					<h1>Questions?</h1>
+
+					<h3>Thank you!</h3>
+
+					<p>
+							<a href="http://lincolnloop.com/about/mtrythall">Michael Trythall</a> / 
+							<a href="http://twitter.com/mtrythall">@mtrythall</a>
+					</p>
+
+					<br /> <!-- Ugh gross -->
+
+					<p>Watch <a href="http://git.io/729TEQ">http://git.io/729TEQ</a> for more examples</p>
 				</section>
 
 			</div>

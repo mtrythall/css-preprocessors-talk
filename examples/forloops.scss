@@ -1,0 +1,3 @@
+@for $i from 1 through 5 {
+  li.item-#{$i} { width: 1.5em * $i; }
+}
