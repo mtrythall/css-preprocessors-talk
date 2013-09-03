@@ -84,6 +84,12 @@
 					</aside>
 				</section>
 
+				<section>
+					<h2>Trying the Examples</h2>
+					<p><a href="http://sassmeister.com/">http://sassmeister.com/</a> or</p>
+					<p><code>gem install sass</code> and <code>sass file</code></p>
+				</section>
+
 				<section data-background="#007777">
 					<h2>kthx let's go</h2>
 				</section>
@@ -122,12 +128,32 @@
 
 				<section data-background="#007777">
 					<h2>What's the Difference?</h2>
-					
-					<!-- XXX -->
+				</section>
 
-					<aside class="notes">
-						
-					</aside>
+				<section>
+					<h2>Sass/SCSS</h2>
+					<ul>
+						<li>Ruby-powered</li>
+						<li>Has <a href="http://compass-style.org/">Compass</a></li>
+						<li>Used by designers and FE folks</li>
+						<li>Very friendly syntax</li>
+						<li>More features than other preprocessors</li>
+						<li>Ecosystem better for building custom things</li>
+						<li>Docs complete but not pretty</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>LESS</h2>
+					<ul>
+						<li>JavaScript-powered</li>
+						<li>Has <a href="http://getbootstrap.com/">Bootstrap</a></li>
+						<li>Used by lots of people, but mostly Bootstrap users</li>
+						<li>Stranger syntax than Sass/SCSS</li>
+						<li>Fewer, but enough, features</li>
+						<li>Ecosystem better for building Bootstrappy things</li>
+						<li>Docs complete (enough) and very pretty</li>
+					</ul>
 				</section>
 
 				<!-- II. Walkthrough -->
@@ -203,6 +229,7 @@ nav a {
 
 				<section>
 					<h2>Imports</h2>
+					<p>Non-blocking, single file imports</p>
 					<pre><code data-trim contenteditable>
 @import "base";
 
@@ -247,7 +274,7 @@ p {
 
 h1 {
     font-size: $font-size * 4; // 64px
-    color: $text-color; // green!
+    color: $text-color;
 }
 					</code></pre>
 
@@ -490,15 +517,15 @@ $size: medium;
 
 p {
 	@if $size == xsmall {
-	font-size: 8px;
+		font-size: 8px;
 	} @else if $size == small {
-	font-size: 10px;
+		font-size: 10px;
 	} @else if $size == large {
-	font-size: 24px;
+		font-size: 24px;
 	} @else if $size == xlarge {
-	font-size: 32px;
+		font-size: 32px;
 	} @else {
-	font-size: 16px;
+		font-size: 16px;
 	}
 }
 					</code></pre>
@@ -614,6 +641,23 @@ $link-color-hover: darken($blue, 3%);
 				</section>
 
 				<section>
+					<h2>Careful with variable flipping</h2>
+					<p>Careful with em based layouts and derivative color palettes</p>
+
+					<pre><code data-trim contenteditable>
+$base-color: blue;
+
+// If $base-color changes, this could be very alarming
+$link-color: darken($base-color, 5%); 
+
+$base-font-size: 16px;
+
+// If $base-font-size changes, could be *huge*, or tiny!
+$h1-font-size: $base-font-size * 2.5; 
+					</code></pre>
+				</section>
+
+				<section>
 					<h2>Avoid Deep Nests</h2>
 					<p>Don't mimic HTML structure, use minimal selectors</p>
 
@@ -651,7 +695,7 @@ $link-color-hover: darken($blue, 3%);
 
 				<section>
 					<h2>Limit and Flatten Classes</h2>
-					<p>Use @extends and mixins to keep things DRY</p>
+					<p>Use extends and mixins to keep things DRY</p>
 
 					<pre><code data-trim contenteditable>
 .article {
@@ -688,7 +732,7 @@ $link-color-hover: darken($blue, 3%);
   &:after { clear: both; }
 }
 
-.component {
+.article {
   @extend %clearfix;
   padding: 10px;
 
@@ -696,11 +740,11 @@ $link-color-hover: darken($blue, 3%);
     @extend %clearfix;
     color: green;
    
-    span { font-size: 30px; }
+    .title { float: left; }
   }
 }
 
-.special-component { @extend .component; }
+.featured-article { @extend .article; }
 					</code></pre>
 				</section>
 
@@ -709,48 +753,29 @@ $link-color-hover: darken($blue, 3%);
 					<p>Consider nesting strategy, extends, and mixins as you go</p>
 
 					<pre><code data-trim contenteditable>
-.component:before, .special-component:before, .component h3:before, .special-component h3:before, .component:after, .special-component:after, .component h3:after, .special-component h3:after {
+.article:before, .featured-article:before, .article h3:before, .featured-article h3:before, .article:after, .featured-article:after, .article h3:after, .featured-article h3:after {
   content: " ";
   display: table;
 }
-.component:after, .special-component:after, .component h3:after, .special-component h3:after {
+.article:after, .featured-article:after, .article h3:after, .featured-article h3:after {
   clear: both;
 }
 
-.component, .special-component {
+.article, .featured-article {
   padding: 10px;
 }
-.component h3, .special-component h3 {
+.article h3, .featured-article h3 {
   color: green;
 }
-.component h3 span, .special-component h3 span {
-  font-size: 30px;
+.article h3 .title, .featured-article h3 .title {
+  float: left;
 }
 					</code></pre>
 				</section>
 
 				<section>
-					<h2>Careful with variable flipping</h2>
-					<p>Careful with em based layouts and derivative color palettes</p>
-
-					<pre><code data-trim contenteditable>
-$base-color: blue;
-
-// If $base-color changes, this could be very alarming
-$link-color: darken($base-color, 5%); 
-
-$base-font-size: 16px;
-
-// If $base-font-size changes, could be *huge*, or tiny!
-$h1-font-size: $base-font-size * 2.5; 
-					</code></pre>
+					<h2>On Deployment &amp; Workflow</h2>
 				</section>
-
-				<section data-background="#007777">
-					<h2>OK, what else?</h2>
-				</section>
-
-				
 
 				<section>
 					<h1>FIN</h1>

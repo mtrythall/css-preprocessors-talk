@@ -3,7 +3,7 @@
   &:after { clear: both; }
 }
 
-.component {
+.article {
   @extend %clearfix;
   padding: 10px;
 
@@ -11,8 +11,8 @@
     @extend %clearfix;
     color: green;
    
-    span { font-size: 30px; }
+    .title { float: left; }
   }
 }
 
-.special-component { @extend .component; }
+.featured-article { @extend .article; }
