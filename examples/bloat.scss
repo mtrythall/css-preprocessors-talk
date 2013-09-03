@@ -1,0 +1,18 @@
+%clearfix {
+  &:before, &:after { content: " "; display: table; }
+  &:after { clear: both; }
+}
+
+.component {
+  @extend %clearfix;
+  padding: 10px;
+
+  h3 {
+    @extend %clearfix;
+    color: green;
+   
+    span { font-size: 30px; }
+  }
+}
+
+.special-component { @extend .component; }

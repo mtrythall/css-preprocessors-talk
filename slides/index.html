@@ -355,6 +355,7 @@ p {
 					<h2>Built-ins</h2>
 					
 
+					<!-- XXX -->
 					<pre><code data-trim contenteditable>
 lighten()
 					</code></pre>
@@ -421,7 +422,7 @@ lighten()
 				<section>
 					<h2>Functions</h2>
 					<p>Not in LESS</p>
-
+<!-- XXX -->
 				</section>
 
 				<section>
@@ -539,7 +540,7 @@ p {
 $sans-serif: 'Open Sans',sans-serif;
 $sans-serif-cond: 'Open Sans Condensed',sans-serif;
 $serif: 'Lora',serif;
-$anchor-font: 'Roboto Condensed',sans-serif;
+$header-font: 'Roboto Condensed',sans-serif;
 
 $base-font-family: $sans-serif;
 $base-font-size: 16px;
@@ -587,6 +588,29 @@ $link-color-hover: darken($blue, 3%);
 				<section>
 					<h2>Use Imports</h2>
 					<p>Should look like a table of contents for your styles</p>
+					
+					<pre><code data-trim contenteditable>
+@import "base"; // Where configuration lives
+
+@import "mixins"; // Global mixins
+@import "partials"; // Doesn't get compiled to CSS
+
+@import "global/layout";
+@import "global/header/search";
+@import "global/header/navigation";
+@import "global/footer";
+@import "global/side-nav";
+
+@import "views/articles/interactive";
+@import "views/articles/features";
+@import "views/articles/photos";
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Smart Folder Structure</h2>
+
+					<img src="images/smart-folder-structure.png" alt="Smarter folder structure" />
 				</section>
 
 				<section>
@@ -595,9 +619,9 @@ $link-color-hover: darken($blue, 3%);
 
 					<pre><code data-trim contenteditable>
 .slideshow {
-	.page {
-		.title {
-			.wrap {
+	div {
+		header {
+			h3.title {
 				
 				a {
 					color: blue;	
@@ -611,14 +635,122 @@ $link-color-hover: darken($blue, 3%);
 
 				<section>
 					<h2>Avoid Deep Nests (compiled)</h2>
-					<p>Looks benign, hard to override</p>
+					<p>Looks benign, creates specificity nightmares</p>
 
 					<pre><code data-trim contenteditable>
-.slideshow .page .title .wrap a {
+.slideshow div header h3.title a {
   color: blue;
 }
 					</code></pre>
+
+					<aside class="notes">
+						<p>A good rule of thumb is never go more than 3 levels deep</p>
+						<p>Use ~3 classes per element: base, modifier, state</p>
+					</aside>
 				</section>
+
+				<section>
+					<h2>Limit and Flatten Classes</h2>
+					<p>Use @extends and mixins to keep things DRY</p>
+
+					<pre><code data-trim contenteditable>
+.article {
+	font-size: 20px;
+	color: black;
+}
+
+.featured {
+	font-size: 30px;
+}
+
+.featured-sponsored {
+	@extend .featured;
+	color: yellow;
+}
+					</code></pre>
+
+					<pre><code data-trim contenteditable>
+&lt;section class="article featured"&gt;
+	&lt;h3&gt;Article Title&lt;/h3&gt;
+&lt;/section&gt;
+
+&lt;section class="articled featured-sponsored"&gt;
+	&lt;h2&gt;This article is a *featured* sponsored article&lt;/h2&gt;
+&lt;/section&gt;
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Watch for Bloat</h2>
+					<pre><code data-trim contenteditable>
+%clearfix {
+  &:before, &:after { content: " "; display: table; }
+  &:after { clear: both; }
+}
+
+.component {
+  @extend %clearfix;
+  padding: 10px;
+
+  h3 {
+    @extend %clearfix;
+    color: green;
+   
+    span { font-size: 30px; }
+  }
+}
+
+.special-component { @extend .component; }
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Watch for Bloat (compiled)</h2>
+					<p>Consider nesting strategy, extends, and mixins as you go</p>
+
+					<pre><code data-trim contenteditable>
+.component:before, .special-component:before, .component h3:before, .special-component h3:before, .component:after, .special-component:after, .component h3:after, .special-component h3:after {
+  content: " ";
+  display: table;
+}
+.component:after, .special-component:after, .component h3:after, .special-component h3:after {
+  clear: both;
+}
+
+.component, .special-component {
+  padding: 10px;
+}
+.component h3, .special-component h3 {
+  color: green;
+}
+.component h3 span, .special-component h3 span {
+  font-size: 30px;
+}
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Careful with variable flipping</h2>
+					<p>Careful with em based layouts and derivative color palettes</p>
+
+					<pre><code data-trim contenteditable>
+$base-color: blue;
+
+// If $base-color changes, this could be very alarming
+$link-color: darken($base-color, 5%); 
+
+$base-font-size: 16px;
+
+// If $base-font-size changes, could be *huge*, or tiny!
+$h1-font-size: $base-font-size * 2.5; 
+					</code></pre>
+				</section>
+
+				<section data-background="#007777">
+					<h2>OK, what else?</h2>
+				</section>
+
+				
 
 				<section>
 					<h1>FIN</h1>
