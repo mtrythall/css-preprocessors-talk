@@ -1,0 +1,35 @@
+a {
+    color: blue;
+
+    &:hover { // a:hover
+        color: yellow;
+    }
+}
+
+a {
+    nav & { // nav a
+        color: green;
+    }
+}
+
+// Same as above
+nav a {
+    color: green;
+}
+
+/*
+
+// OUTPUT
+
+a {
+  color: blue; }
+  a:hover {
+    color: yellow; }
+
+nav a {
+  color: green; }
+
+nav a {
+  color: green; }
+
+*/

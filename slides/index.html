@@ -39,11 +39,14 @@
 				<section>
 					<h1>CSS Preprocessors</h1>
 					<p>
-						<small>Presented by 
+						Presented by 
 							<a href="http://lincolnloop.com/about/mtrythall">Michael Trythall</a> / 
 							<a href="http://twitter.com/mtrythall">@mtrythall</a>
-						</small>
 					</p>
+
+					<br /> <!-- Ugh gross -->
+
+					<p><a href="http://git.io/729TEQ">http://git.io/729TEQ</a> for slides &amp; code samples</p>
 				</section>
 
 				<section>
@@ -56,7 +59,13 @@
 					</ul>
 
 					<aside class="notes">
-						Notes Here
+						<p>This talk exists to:</li>
+
+						<ul>
+							<li>Encourage smart people outside of the JS and Ruby communities to look at this stuff</li>
+							<li>Help folks better understand tools they may already be using</li>
+							<li>Get you liking CSS and to help you feel more confident with it</li>
+						</ul>
 					</aside>
 				</section>
 
@@ -64,13 +73,13 @@
 					<h2>Following Along</h2>
 					<p>
 						Slides, examples, and more at
-						<a href="https://bit.ly/css-preprocessor-talk">bit.ly/css-preprocessor-talk</a>
+						<a href="http://git.io/729TEQ">http://git.io/729TEQ</a>
 					</p>
 
 					<aside class="notes">
 						<ul>
 							<li>Provides an overview</li>
-							<li>Examples for Sass (in SCSS) and LESS</li>
+							<li>Examples for Sass/SCSS and LESS</li>
 							<li>Small example site</li>
 						</ul>
 					</aside>
@@ -79,7 +88,6 @@
 				<section data-background="#007777">
 					<h2>kthx let's go</h2>
 				</section>
-
 
 				<!-- II. What, why -->
 				<section>
@@ -90,65 +98,141 @@
 						</p>
 					</section>
 					<section>
-						<h2>They Bring Programming Power to CSS</h2>
-						<ul>
-							<li>Better code organization</li>
-							<li>Variables, basic operations</li>
-							<li>Functions</li>
-							<li>Debugging</li>
-						</ul>
-					</section>
-					<section>
-						<h2>Basement Level 2</h2>
-						<p>Cornify</p>
+						<h2>Why use a CSS preprocessor?</h2>
 						<a class="test" href="http://cornify.com">
 							<img width="280" height="326" src="https://s3.amazonaws.com/hakim-static/reveal-js/cornify.gif" alt="Unicorn">
 						</a>
+
+						<aside class="notes">
+							<ul>
+								<li>Standards, and standard groups, move too slowly for the web. You need this stuff now.</li>
+								<li>Lot of tools available, speeding up development</li>
+								<li>Force best practices, otherwise you'll make a mess</li>
+								<li>Debugging. Preprocessors will throw errors even for basic CSS problems.</li>
+								<li>Can DRY up your styles</li>
+							</ul>
+						</aside>
 					</section>
+
 					<section>
-						<h2>Basement Level 3</h2>
-						<p>That's it, time to go back up.</p>
-						<a href="#/2" class="image">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="-webkit-transform: rotate(180deg);">
-						</a>
+						<h2>What's out there?</h2>
+						<p><a href="http://sass-lang.com">Sass</a> and <a href="http://lesscss.org">LESS</a> are the big dogs</p>
 					</section>
 				</section>
 
-				<section>
-					<h2>Point of View</h2>
-					<p>
-						Press <strong>ESC</strong> to enter the slide overview.
-					</p>
-					<p>
-						Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
-					</p>
+				<!-- II. Walkthrough -->
+				<section data-background="#007777">
+					<h2>Alright, what can they do?</h2>
 				</section>
 
 				<section>
-					<h2>Works in Mobile Safari</h2>
-					<p>
-						Try it out! You can swipe through the slides and pinch your way to the overview.
-					</p>
+					<h2>Nesting</h2>
+					<pre><code data-trim contenteditable>
+header {
+    font-size: 5em;
+    
+    .title { // header .title { font-size: 10em; }
+        font-size: 10em;
+
+        a { // header .title a { background: green; color: white; }
+            background: green;
+            color: white;
+        }
+    }
+}
+					</code></pre>
+
+					<pre><code data-trim contenteditable>
+header {
+  font-size: 5em;
+}
+header .title {
+  font-size: 10em;
+}
+header .title a {
+  background: green;
+  color: white;
+}
+					</code></pre>
 				</section>
 
 				<section>
-					<h2>Marvelous Unordered List</h2>
-					<ul>
-						<li>No order here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-					</ul>
+					<h2>Variables</h2>
+					<pre><code data-trim contenteditable>
+$font-size: 16px;
+$text-color: blue;
+
+a {
+    color: $text-color; // blue
+}
+
+p {
+    $text-color: green;
+    $background-color: black;
+
+    a {
+        background-color: $background-color;
+        color: $text-color; // green
+    }
+}
+
+h1 {
+    font-size: $font-size * 4; // 64px
+    color: $text-color; // green!
+}
+					</code></pre>
+
+					<aside class="notes">
+						<p>Important to note that scoping is different between Sass/SCSS and LESS. LESS probably does what you'd expect with regard to globals, while Sass/SCSS doesn't really have global variables</p>
+					</aside>
+				</section>
+				<section>
+					<h2>Variables (result)</h2>
+
+					<pre><code data-trim contenteditable>
+a {
+  color: blue;
+}
+
+p a {
+  background-color: black;
+  color: green;
+}
+
+h1 {
+  font-size: 64px;
+  color: green;
+}
+					</code></pre>
 				</section>
 
 				<section>
-					<h2>Fantastic Ordered List</h2>
-					<ol>
-						<li>One is smaller than...</li>
-						<li>Two is smaller than...</li>
-						<li>Three!</li>
-					</ol>
+					<h2>Operations/Math!</h2>
+					
+
+					<pre><code data-trim contenteditable>
+p {
+    $width: 30em;
+
+    font: 30px/2px; // Normal CSS, no division
+    width: $width/2; // Using a variable causes division
+    height: (500px/2); // Uses parentheses, does division
+    margin-left: 10px + 10px/5px; // Uses +, does division
+}
+					</code></pre>
+
+					<pre><code data-trim contenteditable>
+p {
+  font: 30px/2px;
+  width: 15em;
+  height: 250px;
+  margin-left: 12px;
+}
+</code></pre>
+
 				</section>
+
+				
 
 				<section>
 					<h2>Global State</h2>
@@ -203,27 +287,6 @@
 						&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
 						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
 					</blockquote>
-				</section>
-
-				<section>
-					<h2>Pretty Code</h2>
-					<pre><code data-trim contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) ) {
-        node.className += ' roll';
-      }
-    };
-  }
-}
-					</code></pre>
-					<p>Courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
 				</section>
 
 				<section>

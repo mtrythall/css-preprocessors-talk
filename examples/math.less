@@ -1,8 +1,8 @@
 p {
-    $width: 30em;
+    @width: 30em;
 
     font: 30px/2px; // Normal CSS, no division
-    width: $width/2; // Using a variable causes division
+    width: @width/2; // Using a variable causes division
     height: (500px/2); // Uses parentheses, does division
     margin-left: 10px + 10px/5px; // Uses +, does division
 }
@@ -15,6 +15,7 @@ p {
   font: 30px/2px;
   width: 15em;
   height: 250px;
-  margin-left: 12px; }
+  margin-left: 12px;
+}
 
 */
