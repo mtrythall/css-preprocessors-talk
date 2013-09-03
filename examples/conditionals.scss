@@ -1,4 +1,25 @@
-@mixin button () {
-  display: inline-block;
-  vertical-align: middle;
+$size: medium;
+
+p {
+  @if $size == xsmall {
+    font-size: 8px;
+  } @else if $size == small {
+    font-size: 10px;
+  } @else if $size == large {
+    font-size: 24px;
+  } @else if $size == xlarge {
+    font-size: 32px;
+  } @else {
+    font-size: 16px;
+  }
 }
+
+/*
+
+// OUTPUT
+
+p {
+  font-size: 16px;
+}
+
+*/

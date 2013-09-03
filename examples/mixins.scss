@@ -8,15 +8,28 @@
 
 .box2 {
     @include padding; // padding: 1em;
-
     background: blue;
-    border: 1px solid;
 }
 
 .box1 {
     @include padding(5em); // padding: 5em;
     @include border(left, 10px, dotted, red); // border-left: 10px dotted red;
-
     background: green;
-    border: 1px solid;
 }
+
+/*
+
+// OUTPUT (expanded)
+
+.box2 {
+  padding: 1em;
+  background: blue;
+}
+
+.box1 {
+  padding: 5em;
+  border-left: 10px dotted red;
+  background: green;
+}
+
+*/
